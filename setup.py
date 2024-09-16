@@ -52,96 +52,176 @@ def rd(filename):
 		return fp.read()
 
 #Check GSL installation, necessary for using the Design feature
+# def check_gsl(conf):
+	
+# 	gsl_location = conf.get("gsl","installation_path")
+# 	gsl_required_includes = ["gsl_permutation.h","gsl_randist.h","gsl_rng.h","gsl_matrix.h"]
+# 	gsl_required_links = ["libgsl.a","libgslcblas.a"]
+
+# 	#Check for required GSL includes and links
+# 	for include in gsl_required_includes:
+	
+# 		include_filename = os.path.join(gsl_location,"include","gsl",include)
+# 		sys.stderr.write("Checking if {0} exists... ".format(include_filename))
+
+# 		if os.path.isfile(include_filename):
+# 			sys.stderr.write(green("[OK]\n"))
+# 		else:
+# 			sys.stderr.write(red("[FAIL]\n"))
+# 			return None
+
+# 	for lib in gsl_required_links:
+
+# 		lib_filename = os.path.join(gsl_location,"lib",lib)
+# 		sys.stderr.write("Checking if {0} exists... ".format(lib_filename))
+
+# 		if os.path.isfile(lib_filename):
+# 			sys.stderr.write(green("[OK]\n"))
+# 		else:
+# 			sys.stderr.write(red("[FAIL]\n"))
+# 			return None
+
+# 	return gsl_location
+
+#Modified function:
 def check_gsl(conf):
-	
-	gsl_location = conf.get("gsl","installation_path")
-	gsl_required_includes = ["gsl_permutation.h","gsl_randist.h","gsl_rng.h","gsl_matrix.h"]
-	gsl_required_links = ["libgsl.a","libgslcblas.a"]
+    gsl_location = conf.get("gsl", "installation_path")
+    gsl_required_includes = ["gsl_permutation.h", "gsl_randist.h", "gsl_rng.h", "gsl_matrix.h"]
+    gsl_required_links = ["libgsl.a", "libgslcblas.a"]
 
-	#Check for required GSL includes and links
-	for include in gsl_required_includes:
-	
-		include_filename = os.path.join(gsl_location,"include","gsl",include)
-		sys.stderr.write("Checking if {0} exists... ".format(include_filename))
+    # Check for required GSL includes and links
+    for include in gsl_required_includes:
+        include_filename = os.path.join(gsl_location, "include", "gsl", include)
+        sys.stderr.write("Checking if {0} exists... ".format(include_filename))
 
-		if os.path.isfile(include_filename):
-			sys.stderr.write(green("[OK]\n"))
-		else:
-			sys.stderr.write(red("[FAIL]\n"))
-			return None
+        if os.path.isfile(include_filename):
+            sys.stderr.write(green("[OK]\n"))
+        else:
+            sys.stderr.write(red("[FAIL]\n"))
+            return None
 
-	for lib in gsl_required_links:
+    for lib in gsl_required_links:
+        lib_filename = os.path.join(gsl_location, "lib", lib)
+        sys.stderr.write("Checking if {0} exists... ".format(lib_filename))
 
-		lib_filename = os.path.join(gsl_location,"lib",lib)
-		sys.stderr.write("Checking if {0} exists... ".format(lib_filename))
+        if os.path.isfile(lib_filename):
+            sys.stderr.write(green("[OK]\n"))
+        else:
+            sys.stderr.write(red("[FAIL]\n"))
+            return None
 
-		if os.path.isfile(lib_filename):
-			sys.stderr.write(green("[OK]\n"))
-		else:
-			sys.stderr.write(red("[FAIL]\n"))
-			return None
-
-	return gsl_location
+    return gsl_location
 
 
 #Check fftw3 installation, required from NICAEA
-def check_fftw3(conf):
+# def check_fftw3(conf):
 
-	fftw3_location = conf.get("fftw3","installation_path")
-	fftw3_required_includes = ["fftw3.h"]
-	fftw3_required_links = ["libfftw3.a"]
+# 	fftw3_location = conf.get("fftw3","installation_path")
+# 	fftw3_required_includes = ["fftw3.h"]
+# 	fftw3_required_links = ["libfftw3.a"]
 
-	#Check for required GSL includes and links
-	for include in fftw3_required_includes:
+# 	#Check for required GSL includes and links
+# 	for include in fftw3_required_includes:
 	
-		include_filename = os.path.join(fftw3_location,"include",include)
-		sys.stderr.write("Checking if {0} exists... ".format(include_filename))
+# 		include_filename = os.path.join(fftw3_location,"include",include)
+# 		sys.stderr.write("Checking if {0} exists... ".format(include_filename))
 
-		if os.path.isfile(include_filename):
-			sys.stderr.write(green("[OK]\n"))
-		else:
-			sys.stderr.write(red("[FAIL]\n"))
-			return None
+# 		if os.path.isfile(include_filename):
+# 			sys.stderr.write(green("[OK]\n"))
+# 		else:
+# 			sys.stderr.write(red("[FAIL]\n"))
+# 			return None
 
-	for lib in fftw3_required_links:
+# 	for lib in fftw3_required_links:
 
-		lib_filename = os.path.join(fftw3_location,"lib",lib)
-		sys.stderr.write("Checking if {0} exists... ".format(lib_filename))
+# 		lib_filename = os.path.join(fftw3_location,"lib",lib)
+# 		sys.stderr.write("Checking if {0} exists... ".format(lib_filename))
 
-		if os.path.isfile(lib_filename):
-			sys.stderr.write(green("[OK]\n"))
-		else:
-			sys.stderr.write(red("[FAIL]\n"))
-			return None
+# 		if os.path.isfile(lib_filename):
+# 			sys.stderr.write(green("[OK]\n"))
+# 		else:
+# 			sys.stderr.write(red("[FAIL]\n"))
+# 			return None
 
-	return fftw3_location
+# 	return fftw3_location
+
+#Modified Functions for fftw3 and nicaea:
+def check_fftw3(conf):
+    fftw3_location = conf.get("fftw3", "installation_path")
+    fftw3_required_includes = ["fftw3.h"]
+    fftw3_required_links = ["libfftw3.a"]
+
+    # Check for required FFTW3 includes and links
+    for include in fftw3_required_includes:
+        include_filename = os.path.join(fftw3_location, "include", include)
+        sys.stderr.write("Checking if {0} exists... ".format(include_filename))
+
+        if os.path.isfile(include_filename):
+            sys.stderr.write(green("[OK]\n"))
+        else:
+            sys.stderr.write(red("[FAIL]\n"))
+            return None
+
+    for lib in fftw3_required_links:
+        lib_filename = os.path.join(fftw3_location, "lib", lib)
+        sys.stderr.write("Checking if {0} exists... ".format(lib_filename))
+
+        if os.path.isfile(lib_filename):
+            sys.stderr.write(green("[OK]\n"))
+        else:
+            sys.stderr.write(red("[FAIL]\n"))
+            return None
+
+    return fftw3_location
+
+def check_nicaea(conf):
+    nicaea_root = conf.get("nicaea", "installation_path")
+    nicaea_include = os.path.join(nicaea_root, "include", "nicaea")
+    nicaea_lib = os.path.join(nicaea_root, "lib")
+
+    # Check for NICAEA include and lib directory
+    sys.stderr.write("Checking for {0}...".format(nicaea_include))
+    if os.path.isdir(nicaea_include):
+        sys.stderr.write(green("[OK]\n"))
+    else:
+        sys.stderr.write(red("[FAIL]\n"))
+        return None
+
+    sys.stderr.write("Checking for {0}...".format(os.path.join(nicaea_lib, "libnicaea.a")))
+    if os.path.isfile(os.path.join(nicaea_lib, "libnicaea.a")):
+        sys.stderr.write(green("[OK]\n"))
+    else:
+        sys.stderr.write(red("[FAIL]\n"))
+        return None
+
+    return nicaea_include, nicaea_lib
 
 
 #Check correctness of NICAEA installation
-def check_nicaea(conf):
+# def check_nicaea(conf):
 
-	nicaea_root = conf.get("nicaea","installation_path")
+# 	nicaea_root = conf.get("nicaea","installation_path")
 
-	#These are the include and lib directory
-	nicaea_include = os.path.join(nicaea_root,"include","nicaea")
-	nicaea_lib = os.path.join(nicaea_root,"lib")
+# 	#These are the include and lib directory
+# 	nicaea_include = os.path.join(nicaea_root,"include","nicaea")
+# 	nicaea_lib = os.path.join(nicaea_root,"lib")
 
-	#Check for their existence
-	sys.stderr.write("Checking for {0}...".format(nicaea_include))
-	if os.path.isdir(nicaea_include):
-		sys.stderr.write(green("[OK]\n"))
-	else:
-		sys.stderr.write(red("[FAIL]\n"))
-		return None
+# 	#Check for their existence
+# 	sys.stderr.write("Checking for {0}...".format(nicaea_include))
+# 	if os.path.isdir(nicaea_include):
+# 		sys.stderr.write(green("[OK]\n"))
+# 	else:
+# 		sys.stderr.write(red("[FAIL]\n"))
+# 		return None
 
-	sys.stderr.write("Checking for {0}...".format(os.path.join(nicaea_lib,"libnicaea.a")))
-	if os.path.isfile(os.path.join(nicaea_lib,"libnicaea.a")):
-		sys.stderr.write(green("[OK]\n"))
-	else:
-		sys.stderr.write(red("[FAIL]\n"))
-		return None
+# 	sys.stderr.write("Checking for {0}...".format(os.path.join(nicaea_lib,"libnicaea.a")))
+# 	if os.path.isfile(os.path.join(nicaea_lib,"libnicaea.a")):
+# 		sys.stderr.write(green("[OK]\n"))
+# 	else:
+# 		sys.stderr.write(red("[FAIL]\n"))
+# 		return None
 	
-	return nicaea_include,nicaea_lib
+# 	return nicaea_include,nicaea_lib
 
 
 ############################################################
