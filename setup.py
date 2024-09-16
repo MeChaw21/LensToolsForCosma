@@ -93,7 +93,6 @@ def check_gsl(conf):
     for include in gsl_required_includes:
         include_filename = os.path.join(gsl_location, "include", "gsl", include)
         sys.stderr.write("Checking if {0} exists... ".format(include_filename))
-
         if os.path.isfile(include_filename):
             sys.stderr.write(green("[OK]\n"))
         else:
@@ -103,7 +102,6 @@ def check_gsl(conf):
     for lib in gsl_required_links:
         lib_filename = os.path.join(gsl_location, "lib", lib)
         sys.stderr.write("Checking if {0} exists... ".format(lib_filename))
-
         if os.path.isfile(lib_filename):
             sys.stderr.write(green("[OK]\n"))
         else:
@@ -111,6 +109,7 @@ def check_gsl(conf):
             return None
 
     return gsl_location
+
 
 
 #Check fftw3 installation, required from NICAEA
