@@ -61,7 +61,7 @@ class Plane(Spin0):
 
 		if data.dtype in [np.float,np.float32]:
 			self.space = "real"
-		elif data.dtype==np.complex:
+		elif data.dtype==np.complex128:
 			self.space = "fourier"
 		else:
 			raise TypeError("data type not supported!")
