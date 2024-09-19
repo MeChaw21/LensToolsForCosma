@@ -19,12 +19,12 @@ Decompose a shear map into E and B modes
 	
 		shear_file_1 = fits.open(filename1)
 		angle = shear_file_1[0].header["ANGLE"]
-		gamma = shear_file_1[0].data.astype(np.float)
+		gamma = shear_file_1[0].data.astype(np.float64)
 		shear_file_1.close()
 	
 		shear_file_2 = fits.open(filename2)
 		assert shear_file_2[0].header["ANGLE"] == angle
-		gamma = np.array((gamma,shear_file_2[0].data.astype(np.float)))
+		gamma = np.array((gamma,shear_file_2[0].data.astype(np.float64)))
 		shear_file_2.close()
 	
 		return angle*deg,gamma

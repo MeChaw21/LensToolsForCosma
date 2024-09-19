@@ -503,7 +503,7 @@ class Ensemble(object):
 		""" 
 
 		assert self.num_realizations>1, "I can't compute a covariance matrix with one realization only!!"
-		assert self.data.dtype == np.float, "This operation is unsafe with non float numbers!!"
+		assert self.data.dtype == np.float64, "This operation is unsafe with non float numbers!!"
 
 		if bootstrap:
 			return self.bootstrap(_bsp_covariance,**kwargs)
@@ -525,7 +525,7 @@ class Ensemble(object):
 
 		"""
 
-		assert self.data.dtype == np.float, "This operation is unsafe with non float numbers!!"
+		assert self.data.dtype == np.float64, "This operation is unsafe with non float numbers!!"
 		if self.num_realizations==1:
 			return np.ones((1,1))
 		else:	

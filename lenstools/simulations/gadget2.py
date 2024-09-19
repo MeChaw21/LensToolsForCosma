@@ -525,14 +525,14 @@ class Gadget2Snapshot(NbodySnapshot):
 
 
 		#Convert units for positions and velocities
-		_positions_converted = self.positions.to(self.kpc_over_h).value.astype(np.float32)
+		_positions_converted = self.positions.to(self.kpc_over_h).value.astype(np.float64)
 
 		if hasattr(self,"velocities"):
 			assert self.positions.shape==self.velocities.shape
-			_velocities_converted = (self.velocities.to(u.cm/u.s).value / self._velocity_unit).astype(np.float32)
+			_velocities_converted = (self.velocities.to(u.cm/u.s).value / self._velocity_unit).astype(np.float64)
 			writeVel = 1
 		else:
-			_velocities_converted = np.zeros((1,3),dtype=np.float32)
+			_velocities_converted = np.zeros((1,3),dtype=np.float64)
 			writeVel = 0
 
 		#Check if we want to split on multiple files (only DM particles supported so far for this feature)
@@ -774,7 +774,7 @@ class Gadget2SnapshotPipe(Gadget2SnapshotDE):
 		self.fp.read(8)
 		
 		try:
-			self.positions = (np.fromstring(self.fp.read(4*3*npart),dtype=np.float32).reshape(npart,3) * self.kpc_over_h).to(self.Mpc_over_h)
+			self.positions = (np.fromstring(self.fp.read(4*3*npart),dtype=np.float64).reshape(npart,3) * self.kpc_over_h).to(self.Mpc_over_h)
 		except AttributeError:
 			pass
 

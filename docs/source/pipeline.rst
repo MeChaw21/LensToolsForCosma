@@ -814,7 +814,7 @@ Create a file "matter_power_spectrum.py"
 		k_egdes  = np.linspace(settings.kmin,settings.kmax,settings.num_k_bins+1).to(model.Mpc_over_h**-1)
 
 		#Placeholder for the density MPI communications
-		density_placeholder = np.empty((settings.fft_grid_size,)*3,dtype=np.float32)
+		density_placeholder = np.empty((settings.fft_grid_size,)*3,dtype=np.float64)
 		if pool is not None:
 			pool.openWindow(density_placeholder)
 

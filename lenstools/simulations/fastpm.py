@@ -154,5 +154,5 @@ class FastPMSnapshotStretchZ(FastPMSnapshot):
 		super(FastPMSnapshotStretchZ,self).getPositions(first,last,True)
 
 		#Replace z with comoving distances
-		self.positions[:,2] = self.cosmology.comoving_distance(1./self.aemit-1.).to(self.positions.unit).astype(np.float32)
+		self.positions[:,2] = self.cosmology.comoving_distance(1./self.aemit-1.).to(self.positions.unit).astype(np.float64)
 		return self.positions

@@ -64,10 +64,10 @@ class Spin0(object):
 			assert data.shape[0]==data.shape[1],"The map must be a square!!"
 
 		#Convert to double precision for calculation accuracy
-		if data.dtype in (np.float,np.complex128):
+		if data.dtype in (np.float64,np.complex128):
 			self.data = data
 		else:
-			self.data = data.astype(np.float)
+			self.data = data.astype(np.float64)
 			
 		self.side_angle = angle
 		self.resolution = self.side_angle / self.data.shape[0]
@@ -1399,8 +1399,8 @@ class Spin0(object):
 		modes_ly_0[:,:,1:] = 0
 
 		#Count the total number of modes, and the number of modes with ly=0 
-		num_modes = np.diff(modes_on.sum((1,2)).astype(np.float))
-		num_modes_ly_0 = np.diff(modes_ly_0.sum((1,2)).astype(np.float))
+		num_modes = np.diff(modes_on.sum((1,2)).astype(np.float64))
+		num_modes_ly_0 = np.diff(modes_ly_0.sum((1,2)).astype(np.float64))
 
 		#Return the corrected number of modes that yields the right variance in the Gaussian case
 		return num_modes**2/(num_modes+num_modes_ly_0)

@@ -15,8 +15,8 @@ def test_nfw():
 	snap = Gadget2Snapshot()
 
 	#Add only one particle
-	snap.setPositions(np.ones((1,3),dtype=np.float32)*120.0*u.Mpc)
-	snap.weights = np.ones(1,dtype=np.float32)
+	snap.setPositions(np.ones((1,3),dtype=np.float64)*120.0*u.Mpc)
+	snap.weights = np.ones(1,dtype=np.float64)
 	snap.virial_radius = np.array([200.0]) * u.Mpc
 	snap.concentration = np.array([1.0])
 

@@ -126,7 +126,7 @@ def cnstTime(pool,batch,settings,batch_id,override):
 	kind = settings.kind
 
 	#Place holder for the lensing density on the plane
-	density_projected = np.empty((plane_resolution,)*2,dtype=np.float32)
+	density_projected = np.empty((plane_resolution,)*2,dtype=np.float64)
 
 	#Open a RMA window on the density placeholder
 	if pool is not None:
@@ -362,7 +362,7 @@ def lightCone(pool,batch,settings,batch_id,override):
 	kind = settings.kind
 
 	#Place holder for the lensing density on the plane
-	density_projected = np.empty((plane_resolution,)*2,dtype=np.float32)
+	density_projected = np.empty((plane_resolution,)*2,dtype=np.float64)
 
 	################################################################################
 	#Compute the discrete comoving distances which will be the center of the lenses#

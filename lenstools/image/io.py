@@ -30,7 +30,7 @@ def saveFITS(self,filename,double_precision):
 	if double_precision:
 		hdu = fits.PrimaryHDU(self.data)
 	else:
-		hdu = fits.PrimaryHDU(self.data.astype(np.float32))
+		hdu = fits.PrimaryHDU(self.data.astype(np.float64))
 
 	#Generate a header
 	if hasattr(self,"cosmology") and (self.cosmology is not None):

@@ -464,11 +464,11 @@ class NbodySnapshot(object):
 
 
 		#Compute the number count histogram
-		assert positions.value.dtype==np.float32
+		assert positions.value.dtype==np.float64
 
 		#Weights
 		if self.weights is not None:
-			weights = (self.weights * self._header["num_particles_total"] / ((len(xi) - 1) * (len(yi) - 1) * (len(zi) - 1))).astype(np.float32)
+			weights = (self.weights * self._header["num_particles_total"] / ((len(xi) - 1) * (len(yi) - 1) * (len(zi) - 1))).astype(np.float64)
 		else:
 			weights = None
 
@@ -621,14 +621,14 @@ class NbodySnapshot(object):
 
 		#Weights
 		if self.weights is not None:
-			weights = self.weights.astype(np.float32)
+			weights = self.weights.astype(np.float64)
 		else:
 			weights = None
 
 		#Virial radius
 		if self.virial_radius is not None:
 			assert weights is not None,"Particles have virial radiuses, you should specify their weight!"
-			weights  = (weights * self._header["num_particles_total"] / ((len(binning[0]) - 1) * (len(binning[1]) - 1) * (len(binning[2]) - 1))).astype(np.float32)
+			weights  = (weights * self._header["num_particles_total"] / ((len(binning[0]) - 1) * (len(binning[1]) - 1) * (len(binning[2]) - 1))).astype(np.float64)
 			rv = self.virial_radius.to(positions.unit).value
 		else:
 			rv = None
@@ -653,7 +653,7 @@ class NbodySnapshot(object):
 			density_normalization = bin_resolution[normal] * center * (1.+zlens)
 
 		#Now use gridding to compute the density along the slab
-		assert positions.value.dtype==np.float32
+		assert positions.value.dtype==np.float64
 
 		#Log
 		if self.pool is not None:
@@ -697,7 +697,7 @@ class NbodySnapshot(object):
 				logplanes.debug("Task {0} collected {1:.3e} particles".format(self.pool.rank,NumPartTask))
 
 				#Compute how many particles in total shoud be collected (for checking)
-				NumPartTotalExpected = np.zeros(1,dtype=np.float32)
+				NumPartTotalExpected = np.zeros(1,dtype=np.float64)
 				self.pool.comm.Reduce(np.array([NumPartTask]),NumPartTotalExpected)
 
 				#Log
@@ -956,7 +956,7 @@ class NbodySnapshot(object):
 
 		#Weights
 		if self.weights is not None:
-			weights = self.weights.astype(np.float32)
+			weights = self.weights.astype(np.float64)
 		else:
 			weights = None
 
@@ -1101,7 +1101,7 @@ class NbodySnapshot(object):
 
 		#Translate the transverse coordinates so that the lower corner is in (0,0)
 		for i in range(2):
-			positions[:,plane_directions[i]] -= left_corner[plane_directions[i]].astype(np.float32)
+			positions[:,plane_directions[i]] -= left_corner[plane_directions[i]].astype(np.float64)
 
 		#Create a list that holds the bins
 		binning = [None,None,None]
@@ -1153,7 +1153,7 @@ class NbodySnapshot(object):
 			positions[:,plane_directions[i]] /= positions[:,normal]
 
 		#Now use grid3d to compute the angular density on the lens plane
-		assert positions.dtype==np.float32
+		assert positions.dtype==np.float64
 
 		if self.virial_radius is not None:
 			rv = self.virial_radius.to(positions.unit).value

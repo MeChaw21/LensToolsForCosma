@@ -59,7 +59,7 @@ class Plane(Spin0):
 		else:
 			self.comoving_distance = cosmology.comoving_distance(redshift)
 
-		if data.dtype in [np.float,np.float32]:
+		if data.dtype in [np.float,np.float32,np.float64]:
 			self.space = "real"
 		elif data.dtype==np.complex128:
 			self.space = "fourier"

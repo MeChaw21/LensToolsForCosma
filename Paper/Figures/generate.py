@@ -92,7 +92,7 @@ def parse_log(fp):
 	#Construct the DataFrame
 	df = pd.DataFrame.from_dict({"timestamp":timestamp,"level":log_level,"step":step_type,"peak_memory(GB)":peak_memory})
 	df["delta_timestamp"] = df.timestamp.diff()
-	dt_s = df.delta_timestamp.values.astype(np.float) / 1.0e9
+	dt_s = df.delta_timestamp.values.astype(np.float64) / 1.0e9
 	dt_s[0] = 0
 	df["delta_timestamp_s"] = dt_s
 	df["timestamp_s"] = dt_s.cumsum()

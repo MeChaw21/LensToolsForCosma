@@ -93,7 +93,7 @@ class AmigaHalos(NbodySnapshot):
 		else:
 			m,x,y,z,rv,c = np.loadtxt(self.fp,usecols=(3,5,6,7,11,42))[first:last].T
 		
-		positions = np.array((x,y,z)).astype(np.float32).T * self.kpc_over_h
+		positions = np.array((x,y,z)).astype(np.float64).T * self.kpc_over_h
 		self.virial_radius = rv * self.kpc_over_h 
 		self.concentration = c
 		self.weights = ((1./(4*np.pi)) * (c**3/(np.log(1.+c)-c/(1.+c))) * m*(u.Msun/self.header["h"]) / (rhoM*(self.virial_radius**3))).decompose().value
